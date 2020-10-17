@@ -16,7 +16,8 @@ socket.on('connect', function() {
     console.log('Conectado al servidor');
 
     socket.emit('enterChat', user, function(resp) {
-        console.log('User conect in room', resp);
+        // console.log('User conect in room', resp);
+        renderUser(resp);
     });
 });
 
@@ -41,12 +42,14 @@ socket.on('personDisconnect', function(mensaje) {
     console.log('Server:', mensaje);
 });
 
-socket.on('createMessage', function(mensaje) {
-    console.log('Server:', mensaje);
+socket.on('createMessage', function(message) {
+    // console.log('Server:', mensaje);
+    renderMessages(message, false);
+    scrollBottom();
 });
 
 socket.on('personsConnect', (persons) => {
-    console.log(persons);
+    renderUser(persons);
 });
 
 
